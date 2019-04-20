@@ -1,5 +1,5 @@
 {
-  "name": "electron-create-react-app-typescript-python",
+  "name": "electron-react-typescript-python",
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
@@ -66,7 +66,7 @@
     "not op_mini all"
   ],
   "build": {
-    "appId": "com.example.electron-create-react-app-typescript-python",
+    "appId": "com.example.electron-react-typescript-python",
     "productName": "My Electron Python App",
     "forceCodeSigning": false,
     "directories": {
