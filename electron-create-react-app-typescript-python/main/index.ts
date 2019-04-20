@@ -20,9 +20,9 @@ app.on("ready", () => {
 
 function createWindow() {
   const win = new BrowserWindow();
+  win.webContents.openDevTools();
   if (isDev) {
     win.loadURL("http://localhost:3000/index.html");
-    win.webContents.openDevTools();
   } else {
     win.loadURL(`file://${path.join(__dirname, "/../build/index.html")}`);
   }

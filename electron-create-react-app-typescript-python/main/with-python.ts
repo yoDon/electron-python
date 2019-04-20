@@ -31,11 +31,18 @@ const initializeApi = async () => {
   if (__dirname.indexOf("app.asar") > 0) {
     // dialog.showErrorBox("info", "packaged");
     if (fs.existsSync(exePath)) {
-      pyProc = childProcess.execFile(exePath, ["--apiport", String(apiDetails.port), "--signingkey", apiDetails.signingKey]);
+      pyProc = childProcess.execFile(exePath, ["--apiport", String(apiDetails.port), "--signingkey", apiDetails.signingKey], {}, (error, stdout, stderr) => {
+        if (error) {
+          console.log(error);
+          console.log(stderr);
+        }
+      });
       if (pyProc === undefined) {
         dialog.showErrorBox("Error", "pyProc is undefined");
+        dialog.showErrorBox("Error", exePath);
       } else if (pyProc === null) {
         dialog.showErrorBox("Error", "pyProc is null");
+        dialog.showErrorBox("Error", exePath);
       }
     } else {
       dialog.showErrorBox("Error", "Packaged python app not found");

@@ -77,7 +77,7 @@ class App extends Component<IOwnProps> {
           this.resultDiv!.textContent = data.calc;
         })
         .catch(() => {
-          this.resultDiv!.textContent = "Error getting result with port=" + this.apiPort + " and signingkey='" + this.apiSigningKey + "'";
+          this.resultDiv!.textContent = "Error getting result with port=" + this.apiPort + " and signingkey='" + this.apiSigningKey + "' (if this is the first call, python may need a few seconds to init)";
         });
     }
   }

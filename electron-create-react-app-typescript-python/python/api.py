@@ -43,14 +43,14 @@ class Query(ObjectType):
     hello = String(description="Hello", signingkey=String(required=True))
     def resolve_hello(self, info, signingkey):
         if signingkey != apiSigningKey:
-            return ""
+            return "invalid signature"
         return "World"
     
     calc = String(description="Calculator", signingkey=String(required=True), math=String(required=True))
     def resolve_calc(self, info, signingkey, math):
         """based on the input text, return the int result"""
         if signingkey != apiSigningKey:
-            return ""
+            return "invalid signature"
         try:
             return real_calc(math)
         except Exception:
@@ -59,7 +59,7 @@ class Query(ObjectType):
     echo = String(description="Echo", signingkey=String(required=True), text=String(required=True))
     def resolve_echo(self, info, signingkey, text):
         if signingkey != apiSigningKey:
-            return ""
+            return "invalid signature"
         """echo any text"""
         return text
 
@@ -74,6 +74,7 @@ apiSigningKey = args.signingkey
 
 app = Flask(__name__)
 app.add_url_rule("/graphql/", view_func=view_func)
+app.add_url_rule("/graphiql/", view_func=view_func) # for compatibility with other samples
 CORS(app) # Allows all domains to access the flask server via CORS
 
 if __name__ == "__main__":

@@ -2,6 +2,10 @@
 
 This example builds a stand-alone Electron + Create-React-App + Python application and installer. On Windows it builds the app into `./dist/win-unpacked/My Electron Python App.exe` and the installer into `./dist/My Electron Python App Setup 1.0.0.exe` (OSX and Linux destinations are similar). You can change the name of the application by changing the `name` property in `package.json`.
 
+# Other great boilerplates
+
+This package is focused on using TypeScript and Create React App with Electron. If you're looking for Next.js rather than Create React App or if you're looking for JavaScript and Create React App, check out https://github.com/saltyshiomix/nextron or https://github.com/neutrinog/react-app-electron-template, respectively.
+
 # Installation
 
 Tested with Anaconda Python v3, should work fine with Anaconda Python v2 (should also work fine with whatever python environment you use if you have the correct packages installed).
@@ -51,7 +55,7 @@ npm run build # must be run in the same shell you just conda activated
 
 # Debugging Python server
 
-To test the Python GraphQL server, in a conda activated terminal window run `npm run build-python`, cd into the newly generated `pythondist` folder, and run `api.exe --apiport 5000 --signingkey devkey` then browse to `http://127.0.0.1:5000/graphql/` to access a GraphiQL view of the server. For a more detailed example, try `http://127.0.0.1:5000/graphql/?query={calc(math:"1/2",signingkey:"devkey")}` which works great if you copy and paste into the browser but which is a complex enough URL that it will confuse chrome if you try to click directly on it.
+To test the Python GraphQL server, in a conda activated terminal window run `npm run build-python`, cd into the newly generated `pythondist` folder, and run `api.exe --apiport 5000 --signingkey devkey` then browse to `http://127.0.0.1:5000/graphiql/` to access a GraphiQL view of the server. For a more detailed example, try `http://127.0.0.1:5000/graphiql/?query={calc(math:"1/2",signingkey:"devkey")}` which works great if you copy and paste into the browser but which is a complex enough URL that it will confuse chrome if you try to click directly on it.
 
 # Notes
 

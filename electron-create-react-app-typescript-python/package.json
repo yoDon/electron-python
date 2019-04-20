@@ -78,16 +78,19 @@
     },
     "files": [
       "node_modules/**",
-      "buildMain/**"
+      "buildMain/**",
+      "pythondist/**"
     ],
     "extraResources": [],
     "extraFiles": [],
-    "mac": {},
+    "mac": {
+      "target": "dmg"
+    },
     "mas": {},
     "dmg": {},
     "pkg": {},
     "win": {
-      "target": "portable"
+      "target": "nsis"
     },
     "nsis": {},
     "nsisWeb": {},
