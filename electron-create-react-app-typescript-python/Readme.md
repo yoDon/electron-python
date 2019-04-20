@@ -31,7 +31,10 @@ npm rebuild
 cmd # Only needed if you're coding on Windows in VS Code or Powershell, as discussed above
 conda env create -f environment.yml
 conda activate electron-python-sample
-conda env list # make sure the electron-python-sample has a * in front indicating it is activated (under Powershell on Windows the activate command fails silently which is why you needed to run the conda commands in a cmd prompt)
+conda env list 
+# in the list, make sure the electron-python-sample has a * in front indicating it is activated 
+# (under Powershell on Windows the activate command fails silently which is why you needed to run 
+# the conda commands in a cmd prompt)
 
 # run the unpackaged python scripts from a dev build of electron
 npm run start # must be run in the same shell you just conda activated
@@ -47,15 +50,20 @@ ModuleNotFoundError: No module named 'graphene'
 ```
 
 ```bash
-# use pyinstaller to convert the source code in python/ into an executable in pythondist/, build the electron app, and run electron-packager to package the electron app as a single file
+# use pyinstaller to convert the source code in python/ into an 
+# executable in pythondist/, build the electron app into a subdirectory 
+# of dist/, and run electron-packager to package the electron app as a 
+# platform-specific installer in dist/
 npm run build # must be run in the same shell you just conda activated
 
-# double-click to run the either the platform-specific app that is built into a subdirectory of dist or the platform-specific installer that is built and placed in the dist folder
+# double-click to run the either the platform-specific app that is built 
+# into a subdirectory of dist/ or the platform-specific installer that is 
+# built and placed in the dist/ folder
 ```
 
-# Debugging Python server
+# Debugging the Python process
 
-To test the Python GraphQL server, in a conda activated terminal window run `npm run build-python`, cd into the newly generated `pythondist` folder, and run `api.exe --apiport 5000 --signingkey devkey` then browse to `http://127.0.0.1:5000/graphiql/` to access a GraphiQL view of the server. For a more detailed example, try `http://127.0.0.1:5000/graphiql/?query={calc(math:"1/2",signingkey:"devkey")}` which works great if you copy and paste into the browser but which is a complex enough URL that it will confuse chrome if you try to click directly on it.
+To test the Python GraphQL server, in a conda activated terminal window run `npm run python-build`, cd into the newly generated `pythondist` folder, and run `api.exe --apiport 5000 --signingkey devkey` then browse to `http://127.0.0.1:5000/graphiql/` to access a GraphiQL view of the server. For a more detailed example, try `http://127.0.0.1:5000/graphiql/?query={calc(math:"1/2",signingkey:"devkey")}` which works great if you copy and paste into the browser but which is a complex enough URL that it will confuse chrome if you try to click directly on it.
 
 # Notes
 
@@ -63,4 +71,4 @@ The electron main process both spawns the Python child process and creates the w
 
 The Python script `python/calc.py` provides a function: `calc(text)` that can take text like `1 + 1` and return the result like `2.0`. The calc functionality is exposed as a GraphQL api by `python/api.py`.
 
-The details of how the electron app launches the Python executable is tricky because of differences between packaged and unpackaged scenarios. This complexity is handled by `main/background-with-python.ts`. If the Electron app is not packaged, the code needs to `spawn` the Python source script. If the Electron app is packaged, it needs to `execFile` the packaged Python executable found in the app.asar. To decide whether the Electron app itself has been packaged for distribution or not, `main/with-python.ts` checks whether the `__dirname` looks like an asar folder or not. Killing spawned processes under Electron can also be tricky so the electron main process sends a message to the Python server telling it to exit when Electron is shutting down.
+The details of how the electron app launches the Python executable is tricky because of differences between packaged and unpackaged scenarios. This complexity is handled by `main/with-python.ts`. If the Electron app is not packaged, the code needs to `spawn` the Python source script. If the Electron app is packaged, it needs to `execFile` the packaged Python executable found in the app.asar. To decide whether the Electron app itself has been packaged for distribution or not, `main/with-python.ts` checks whether the `__dirname` looks like an asar folder or not. Killing spawned processes under Electron can also be tricky so the electron main process sends a message to the Python server telling it to exit when Electron is shutting down (and yes, that does mean that if you are debugging and control-c to kill the process hosting the app you can leave a zombie python process, so it's better to close the app normally by closing the window before killing your npm process).
