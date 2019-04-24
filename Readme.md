@@ -28,9 +28,10 @@ cmd # Only needed if you're coding on Windows in VS Code or Powershell, as discu
 conda env create -f environment.yml
 conda activate electron-python-sample
 conda env list 
-# in the list, make sure the electron-python-sample has a * in front indicating it is activated 
-# (under Powershell on Windows the activate command fails silently which is why you needed to run 
-# the conda commands in a cmd prompt)
+# in the list, make sure the electron-python-sample has a * in front
+# indicating it is activated (under Powershell on Windows the activate
+# command fails silently which is why you needed to run the conda commands
+# in a cmd prompt)
 
 # run the unpackaged python scripts from a dev build of electron
 npm run start # must be run in the same shell you just conda activated
