@@ -1,4 +1,8 @@
-# Electron + Create-React-App + Python
+# Electron + Python
+
+This sample shows how to build Python Flask apps that run in Electron. I'm using it to combine Python backends with React frontends but if you prefer to use handle your frontend entirely from Flask that should be simple to do. The Electron main (backend) process spawns a Python Flask webserver and provides a randomly generated authentication token to both the webserver and the Electron renderer (frontend) process for use in authenticating messages sent between the frontend and the webserver. 
+
+The webserver currently exposes a GraphQL endpoint for the frontend to interact with but the backend is just a plain old Flask webserver so you can tweak it to host whatever sort of REST or other Flask web services as might be needed by your application. The React frontend part of the sample is similarly based on a stock create-react-app site, so it should be easy to customize as needed. The only significant embelishments to the stock cra app are (1) the bare minimal amount of https://github.com/sharegate/craco to support hooking into electron without needing to eject the create react app and (2) typescript support, which you don't have to use but I personally can't imagine building a serious javascript project without it so it's there if you need it.
 
 This example builds a stand-alone Electron + Create-React-App + Python application and installer. On Windows it builds the app into `./dist/win-unpacked/My Electron Python App.exe` and the installer into `./dist/My Electron Python App Setup 1.0.0.exe` (OSX and Linux destinations are similar). You can change the name of the application by changing the `name` property in `package.json`.
 
