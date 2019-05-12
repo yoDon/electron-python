@@ -59,7 +59,7 @@ const App = () => {
             .catch((e) => {
                 console.log("Error contacting graphql server");
                 console.log(e);
-                setMathResult("Error getting result with port=" + apiPort + " and signingkey='" + apiSigningKey + " (if you launched via npm run start, please check readme about conda activate and cmd. Also, if this is the first call, the server may need a few seconds to initialize)");
+                setMathResult("Error getting result with port=" + apiPort + " and signingkey='" + apiSigningKey + "' (if you launched via npm run start, please check readme about conda activate and cmd. Also, if this is the first call, the server may need a few seconds to initialize)");
             });
         }
     };
